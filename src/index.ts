@@ -6,20 +6,19 @@ import { Extractor } from "./services/extractor";
 
 const start = async () => {
 
-    const mongouri = "mongodb+srv://danieltosinfayemi:mEyya0oKtGWEwUMI@cluster0.2ixnhz5.mongodb.net/softpayextract?retryWrites=true&w=majority"
     // /**
     //  * This is the key used to authenticate the Kafka
     //  */
-    // if (!process.env.KAFKA_KEY) {
-    //     throw new Error('KAFKA_KEY must be defined');
-    // }
+    if (!process.env.KAFKA_KEY) {
+        throw new Error('KAFKA_KEY must be defined');
+    }
 
     /**
      * This key is for mongodb database
      */
-    // if (!process.env.MONGO_URI) {
-    //     throw new Error('MONGO_URI must be defined');
-    // }
+    if (!process.env.MONGO_URI) {
+        throw new Error('MONGO_URI must be defined');
+    }
 
     /**
      * Here we try to connect to the mongodb database using the Key before procedding
@@ -27,8 +26,7 @@ const start = async () => {
      * or Some Database unavalability
      */
     try {
-        await mongoose.connect(mongouri);
-        // await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI);
         console.log('Connected to MongoDb');
     } catch (err) {
         console.error(err);
